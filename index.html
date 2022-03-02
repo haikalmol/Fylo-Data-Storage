@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+    <title>Frontend Mentor | Fylo data storage component</title>
+
+    <!-- Raleway Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="data-storage">
+      <h1 class="sr-only">Fylo data storage component</h1>
+
+      <div class="data-storage__intro">
+        <img src="img/logo.svg" class="data-storage__img" alt="Fylo data storage" draggable="false" />
+        <ul class="data-storage__options">
+          <li class="data-storage__option">
+            <img src="img/icon-document.svg" alt="" draggable="false" />
+          </li>
+          <li class="data-storage__option">
+            <img src="img/icon-folder.svg" alt="" draggable="false" />
+          </li>
+          <li class="data-storage__option">
+            <img src="img/icon-upload.svg" alt="" draggable="false" />
+          </li>
+        </ul>
+      </div>
+      <div class="data-storage__details">
+        <p class="data-storage__text">You've used <strong>815 GB </strong>of your storage</p>
+        <div class="data-storage__progress-bar"></div>
+        <ul class="data-storage__quota">
+          <li class="data-storage__quota-min">0 GB</li>
+          <li class="data-storage__quota-available"><span>185</span> GB Left</li>
+          <li class="data-storage__quota-max">1000 GB</li>
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>

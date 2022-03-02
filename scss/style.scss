@@ -1,0 +1,267 @@
+// Px to Rem Function
+@function rem($px, $root: 16px) {
+  @return ($px / $root) * 1rem;
+}
+
+// Flex mixin
+@mixin flex($flx-dir: row, $just-con: flex-start, $al-itm: stretch) {
+  display: flex;
+  flex-direction: $flx-dir;
+  justify-content: $just-con;
+  align-items: $al-itm;
+}
+
+// Variables
+$primary-color: hsl(228, 56%, 26%);
+$secondary-color: hsl(243, 100%, 93%);
+$tertiary-color: hsl(229, 57%, 11%);
+
+$grey-color: hsl(229, 7%, 55%);
+$white-color: hsl(0, 0%, 100%);
+
+$break-md: rem(768px);
+$break-lg: rem(992px);
+
+/* Reset -------------*/
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+/* Base -------------*/
+body {
+  height: 100vh;
+  @include flex(column, space-evenly, center);
+  color: $secondary-color;
+  font-weight: 400;
+  font-size: rem(14px);
+  font-family: "Raleway", sans-serif;
+  box-sizing: border-box;
+  background: url("../img/bg-mobile.png") no-repeat center / cover;
+
+  @media (min-width: $break-md) {
+    background: url("../img/bg-desktop.png") no-repeat bottom / contain, $tertiary-color;
+    justify-content: center;
+    gap: rem(32px);
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+/* Components -------------*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.data-storage {
+  width: 85%;
+  max-width: rem(920px);
+  @include flex(column);
+  gap: rem(16px);
+
+  @media (min-width: $break-md) {
+    @include flex($flx-dir: row, $al-itm: flex-end);
+    gap: rem(28px);
+  }
+
+  &__intro {
+    background: $primary-color;
+    border-radius: rem(10px);
+    border-top-right-radius: rem(100px);
+    padding: rem(40px);
+    flex: 1;
+  }
+
+  &__img {
+    margin-bottom: rem(35px);
+  }
+
+  &__options {
+    @include flex();
+    gap: rem(16px);
+  }
+
+  &__option {
+    width: rem(50px);
+    background: $tertiary-color;
+    padding: rem(15px);
+    border-radius: rem(10px);
+    @include flex(row, center, center);
+  }
+
+  &__details {
+    background: $primary-color;
+    padding: rem(35px) rem(30px) rem(54px);
+    border-radius: rem(10px);
+    position: relative;
+
+    @media (min-width: $break-md) {
+      flex: 1.65;
+      padding: rem(42px);
+    }
+  }
+
+  &__text {
+    margin-bottom: rem(16px);
+    text-align: center;
+
+    @media (min-width: $break-md) {
+      text-align: left;
+    }
+  }
+
+  &__progress-bar {
+    position: relative;
+    width: 100%;
+    height: rem(18px);
+    padding: 5px;
+    background: lighten($tertiary-color, 7%);
+    border-radius: rem(18px);
+    overflow: hidden;
+    margin-bottom: rem(12px);
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 81.5%;
+      height: rem(14px);
+      top: rem(2px);
+      left: rem(2px);
+      background: linear-gradient(to right, hsl(6, 100%, 80%), hsl(335, 100%, 65%));
+      border-radius: rem(16px);
+      animation: fadeInRight 1s ease-in;
+    }
+
+    &::after {
+      content: "";
+      background-color: $secondary-color;
+      height: rem(10px);
+      width: rem(10px);
+      position: absolute;
+      right: 18.5%;
+      top: rem(8px);
+      transform: translateY(-50%);
+      border-radius: 50%;
+      animation: showUp 0.5s 0.8s ease;
+      animation-fill-mode: backwards;
+    }
+  }
+
+  &__quota {
+    @include flex(row, space-between, center);
+    font-weight: 700;
+
+    &-available {
+      @include flex($al-itm: center);
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      background: $white-color;
+      color: $grey-color;
+      padding: rem(10px) rem(20px);
+      border-radius: rem(10px);
+      text-transform: uppercase;
+
+      @media (min-width: $break-lg) {
+        top: 0;
+        right: rem(42px);
+        bottom: auto;
+        left: auto;
+        transform: translate(0, -50%);
+
+        &::after {
+          content: "";
+          display: block;
+          width: rem(20px);
+          height: rem(20px);
+          border-width: rem(20px);
+          border-color: transparent $white-color transparent transparent;
+          border-style: solid;
+          position: absolute;
+          right: 0;
+          bottom: rem(-15px);
+        }
+      }
+
+      span {
+        font-size: rem(32px);
+        margin-right: rem(5px);
+        color: hsl(0, 0%, 0%);
+      }
+    }
+  }
+}
+
+/* Animations ---------------*/
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes showUp {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Footer ---------------*/
+.attribution {
+  text-align: center;
+  color: $white-color;
+  font-size: rem(16px);
+  padding: rem(16px);
+  font-weight: 500;
+
+  a {
+    transition: color 0.2s;
+    padding-bottom: 2px;
+    text-decoration: none;
+    font-weight: 700;
+
+    &:link,
+    &:visited {
+      color: $grey-color;
+      box-shadow: 0 2px 0 0 $grey-color;
+    }
+
+    &:active,
+    &:hover {
+      color: darken($grey-color, 15%);
+      box-shadow: none;
+    }
+  }
+
+  span {
+    color: hsl(0, 100%, 47%);
+    font-size: rem(20px);
+  }
+}
